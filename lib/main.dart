@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:tradeutp/asset/colors.dart';
-import 'package:tradeutp/asset/database_helper.dart';
+import 'package:tradeutp/screen/favorite_page.dart';
 import 'package:tradeutp/screen/home_page.dart';
+import 'package:tradeutp/screen/new_item_page.dart';
+import 'package:tradeutp/widget/floatingActionButtonRoute.dart';
 void main() {
   runApp(MyApp());
 }
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
       create: (context) => MyAppState(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Namer App',
+        title: 'Trade UTP',
         home: MyHomePage(),
       ),
     );
@@ -40,12 +42,14 @@ class MyHomePage extends StatelessWidget {
     var appState = context.watch<MyAppState>();
 
     return Scaffold(
+      extendBody: true, // Extender el cuerpo detrás del bottomNavigationBar
+      floatingActionButton: FloatingActionButtonRoute(),
       bottomNavigationBar: CustomBottomNavBar(),
       body: IndexedStack(
         index: appState.selectedIndex,
         children: [
           HomePage(),
-          FavoritesScreen(),
+          FavoritePage(),
           NotificationsScreen(),
           MessagesScreen(),
         ],
@@ -106,110 +110,12 @@ class CustomBottomNavBar extends StatelessWidget {
   }
 }
 
-class BottomNavTabs {
-  static const List<GButton> tabs = [
-    GButton(
-      icon: Icons.home,
-      text: 'Inicio',
-      textColor: Color.fromARGB(255, 34, 72, 33)
-    ),
-    GButton(
-      icon: Icons.favorite_border,
-      text: 'Favoritos',
-    ),
-    GButton(
-      icon: Icons.notifications,
-      text: 'Notificaciones',
-    ),
-    GButton(
-      icon: Icons.message,
-      text: 'Mensajes',
-    ),
-  ];
-}
-
-
-/*Inicio de clases para el widget*/
 
 
 
 
-//clase para la ventanan home
-class HomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Home Screen'),
-    );
-  }
-}
 
-// clase para la ventana de favoritos
-class FavoritesScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Favoritos', style: TextStyle(color: Color.fromARGB(255, 34, 72, 33),fontWeight: FontWeight.bold)),
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.person, color: Color.fromARGB(255, 34, 72, 33)),
-            onPressed: () {
-              // Acción para el botón de perfil
-            },
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Buscar',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 4, // Número de elementos en la lista
-                itemBuilder: (context, index) {
-                  return Card(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    child: ListTile(
-                      leading: Image.network('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.flaticon.es%2Ficono-gratis%2Ftransparente_5376400&psig=AOvVaw32FvACLSk4IzE9P2vTwzKL&ust=1719707442535000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLCNlczH_4YDFQAAAAAdAAAAABAE'),
-                      title: Text('Libro de Cálculo'),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Lorem ipsum dolor sit amet, consectetur adipisc...'),
-                          SizedBox(height: 5),
-                          Text(
-                            'Venta \$0.00',
-                            style: TextStyle(
-                              color: Colors.green,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text('Vendedor'),
-                        ],
-                      ),
-                      trailing: Icon(Icons.more_vert),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+
 
 // Clase para la ventana de notificaciones
 class NotificationsScreen extends StatelessWidget {

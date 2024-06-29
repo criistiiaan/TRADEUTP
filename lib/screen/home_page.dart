@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(child: Text('No items found'));
+                  return Center(child: Text('No hay articulos publicados'));
                 } else {
                   List<Map<String, dynamic>> items = snapshot.data!;
                   return GridView.builder(
@@ -230,20 +230,7 @@ class _HomePageState extends State<HomePage> {
         )
     
         ],),
-        floatingActionButton: ClipRRect(
-          borderRadius:BorderRadius.circular(200),
-          child:FloatingActionButton(
-          onPressed: (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => NewItemPage()),
-            );
-          },
-          backgroundColor: colormainColor,
-          
-          child: const Icon(Icons.add, color:Colors.white, ),
-
-        ),),
+        
         
       
       )
