@@ -22,18 +22,18 @@ class DatabaseHelper {
     String path = join(await getDatabasesPath(), 'marketplace.db');
     return await openDatabase(
       path,
-      version: 5,
+      version: 7,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
     );
   }
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
-    if (oldVersion < 6) {
-      await db.execute('ALTER TABLE items ADD COLUMN transaction TEXT');
+    if (oldVersion < 8) {
+      await db.execute('ALTER TABLE items ADD COLUMN transaction_type TEXT');
     }
   }
   Future<void> _onCreate(Database db, int version) async {
-    await db.execute('''
+     await db.execute('''
       CREATE TABLE items (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
@@ -41,30 +41,39 @@ class DatabaseHelper {
         description TEXT,
         price REAL,
         image TEXT,
-        transaction TEXT,
+        transaction_type TEXT,
         fromUsers INTEGER
       );
+    ''');
+
+    await db.execute('''
       CREATE TABLE users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
         surname TEXT,
-        email REAL,
+        email TEXT,
         password TEXT,
         facultad TEXT
       );
+    ''');
+
+    await db.execute('''
       CREATE TABLE favorite (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         fromUsers INTEGER,
         fromItems INTEGER,
         state INTEGER
       );
+    ''');
+
+    await db.execute('''
       CREATE TABLE messenger(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         fromUsersRemitente INTEGER,
         fromUsersDestinatario INTEGER,
         mensaje TEXT,
         state INTEGER
-      )
+      );
     ''');
   }
 
@@ -77,10 +86,10 @@ class DatabaseHelper {
     Database db = await database;
     return await db.query('items');
   }
-  Future<List<Map<String, dynamic>>> getItemsType( String Data) async {
+  Future<List<Map<String, dynamic>>> getItemsType( String data) async {
     Database db = await database;
-    if(Data != 'Todo'){
-      return await db.query('items',where: 'type = ?',whereArgs: [Data], );}
+    if(data != 'Todo'){
+      return await db.query('items',where: 'type = ?',whereArgs: [data], );}
     return getItems();
   }
 

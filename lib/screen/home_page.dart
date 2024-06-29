@@ -1,17 +1,10 @@
 import 'dart:io';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:tradeutp/asset/database_helper.dart';
 import 'package:tradeutp/screen/new_item_page.dart';
 import '../asset/colors.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:provider/provider.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
   
@@ -30,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     'Útiles',
     'Tecno',
   ];
-  final List<String> opciones_filter = [
+  final List<String> opcionesFilter = [
     'Todo',
     'Todo',
     'Ropa',
@@ -48,13 +41,13 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _loadItems() async {
     setState(() {
-      _itemsFuture = DatabaseHelper().getItemsType(opciones_filter[texts.indexOf(whatActiveFilter)]);
+      _itemsFuture = DatabaseHelper().getItemsType(opcionesFilter[texts.indexOf(whatActiveFilter)]);
     });
   }
 
   Future<void> _refreshItems() async {
     setState(() {
-      _itemsFuture = DatabaseHelper().getItemsType(opciones_filter[texts.indexOf(whatActiveFilter)]); // Volver a cargar items
+      _itemsFuture = DatabaseHelper().getItemsType(opcionesFilter[texts.indexOf(whatActiveFilter)]); // Volver a cargar items
     });
   }
 

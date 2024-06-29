@@ -69,7 +69,7 @@ class _NewItemPageState extends State<NewItemPage> {
         'description': description,
         'type': type,
         'price': price,
-        'transaction': transaction,
+        'transaction_type': transaction,
         'image': _imagePath!,
       };
 
@@ -79,8 +79,8 @@ class _NewItemPageState extends State<NewItemPage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double gap_between_TextField = 11;
-    double width_image_picker = (width *0.9);
+    double gapBetweenTextfield = 11;
+    double widthImagePicker = (width *0.9);
 
     return Scaffold(
       extendBody: true, // Extender el cuerpo detrás del bottomNavigationBar
@@ -104,14 +104,7 @@ class _NewItemPageState extends State<NewItemPage> {
           TextButton(
             onPressed: () {
               _addItem();
-            Fluttertoast.showToast(
-                  msg: 'Se cargó exitosamente la publicación',
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.BOTTOM,
-                  backgroundColor: Colors.black,
-                  textColor: Colors.white,
-                  fontSize: 16.0,
-                );              
+                        
                 },
             child: Text(
               'Publicar',
@@ -136,8 +129,8 @@ class _NewItemPageState extends State<NewItemPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
 
             children: [
-            Text(userAccount[0] != Null ? userAccount[0]: "Nombre Apellido"),
-            Text(userAccount[1] != Null ? userAccount[1]: "Nombre de Facultad", style: TextStyle(fontSize: 13, color:colorfaintColor),overflow: TextOverflow.ellipsis,
+            Text(userAccount[0] ??  "Nombre Apellido"),
+            Text(userAccount[1] ??  "Nombre de Facultad", style: TextStyle(fontSize: 13, color:colorfaintColor),overflow: TextOverflow.ellipsis,
                         maxLines: 2,softWrap: true,)
           ],)
         ],),),
@@ -149,7 +142,7 @@ class _NewItemPageState extends State<NewItemPage> {
         child:Center( 
           child:Container(
           height: 100,
-          width: width_image_picker,
+          width: widthImagePicker,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border:Border.all(
@@ -189,7 +182,7 @@ Padding(
               ),
                 labelText: 'Título'),
             ),
-            SizedBox(height: gap_between_TextField,),
+            SizedBox(height: gapBetweenTextfield,),
             TextField(
               controller: descriptionController,
               decoration: InputDecoration(
@@ -199,7 +192,7 @@ Padding(
               ),
               labelText: 'Descripción'),
             ),
-            SizedBox(height: gap_between_TextField,),
+            SizedBox(height: gapBetweenTextfield,),
             TextField(
               controller: priceController,
               decoration: InputDecoration(
@@ -210,7 +203,7 @@ Padding(
               labelText: 'Precio'),
               keyboardType: TextInputType.number,
             ),
-            SizedBox(height: gap_between_TextField,),
+            SizedBox(height: gapBetweenTextfield,),
             DropdownButtonFormField<String>(
               value: _selectedType,
               items: opcionesFilter.map((String value) {
@@ -233,29 +226,7 @@ Padding(
                 borderRadius: BorderRadius.circular(10), // Radio de la esquina del borde
               ),              ),
             ),
-           SizedBox(height: gap_between_TextField,),
-            DropdownButtonFormField<String>(
-              value: _selectedTransaction,
-              items: opcionesTransaction.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedTransaction = newValue;
-                });
-              },
-              decoration: InputDecoration(
-                
-                labelText: 'Tipo de transacción',
-                fillColor: colorfaintColor,
-                border:OutlineInputBorder( // Define un borde redondeado
-                borderSide: BorderSide(color: Colors.grey), // Color del borde
-                borderRadius: BorderRadius.circular(10), // Radio de la esquina del borde
-              ),              ),
-            ),
+           
           ],
         ),
       ),
