@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:tradeutp/asset/colors.dart';
 import 'package:tradeutp/asset/database_helper.dart';
 import 'package:tradeutp/screen/home_page.dart';
+import 'package:tradeutp/screen/notification_page.dart';
 void main() {
   runApp(MyApp());
 }
@@ -46,7 +47,7 @@ class MyHomePage extends StatelessWidget {
         children: [
           HomePage(),
           FavoritesScreen(),
-          NotificationsScreen(),
+          NotificationPage(),
           MessagesScreen(),
         ],
       ),
