@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
+
   int selectedIndex = 0;
 
   void setSelectedIndex(int index) {
