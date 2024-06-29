@@ -110,6 +110,12 @@ class BottomNavTabs {
   ];
 }
 
+
+/*Inicio de clases para el widget*/
+
+
+
+
 //clase para la ventanan home
 class HomeScreen extends StatelessWidget {
   @override
@@ -237,9 +243,9 @@ appBar: AppBar(
             leading: CircleAvatar( backgroundColor: Color.fromARGB(255, 34, 72, 33),
               child: Icon(Icons.person, color: Color.fromARGB(255, 255, 255, 255)),
             ),
-            title: Text('Luis Castro'),
-            subtitle: Text('Sí está disponible.'),
-            trailing: Text('12:52 pm'),
+            title: Text('Luis Castro',style: TextStyle(color: Color.fromARGB(255, 34, 72, 33)),),
+            subtitle: Text('Sí está disponible.', style: TextStyle(color: Color.fromARGB(255, 131, 131, 131)),),
+            trailing: Text('12:52 pm', style: TextStyle(color: Color.fromARGB(255, 131, 131, 131)),),
             selected: true,
             onTap: () {
                 Navigator.push(
@@ -252,9 +258,9 @@ appBar: AppBar(
             leading: CircleAvatar( backgroundColor: Color.fromARGB(255, 34, 72, 33),
               child: Icon(Icons.person, color: Color.fromARGB(255, 255, 255, 255)),
             ),
-            title: Text('Patricia Estrella'),
-            subtitle: Text('Hola, ¿Está disponible?'),
-            trailing: Text('12:52 pm'),
+            title: Text('Patricia Estrella',style: TextStyle(color: Color.fromARGB(255, 34, 72, 33)),),
+            subtitle: Text('Hola, ¿Está disponible?', style: TextStyle(color: Color.fromARGB(255, 131, 131, 131)),),
+            trailing: Text('12:52 pm', style: TextStyle(color: Color.fromARGB(255, 131, 131, 131)),),
             selected: true,
             onTap: () {
               // Acción al hacer clic en Patricia Estrella
