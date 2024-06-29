@@ -55,14 +55,14 @@ class _NewItemPageState extends State<NewItemPage> {
     final imagePath = '${directory.path}/$name';
     return image.copy(imagePath);
   }
-
-  Future<void> _addItem() async {
-    if (_imagePath != null) {
+ 
+  Future<void> _addItem(BuildContext context) async {
+    if (_imagePath != null && nameController.text.isNotEmpty && descriptionController.text.isNotEmpty && _selectedType != null && priceController.text.isNotEmpty) {
       String name = nameController.text;
       String description = descriptionController.text;
-      String type = _selectedType ?? ''; // Use selected type here
+      String type = _selectedType!;
       double price = double.tryParse(priceController.text) ?? 0.0;
-      String transaction =  _selectedTransaction ?? ''; // Use selected type here
+      String transaction = _selectedTransaction ?? '';
 
       Map<String, dynamic> item = {
         'name': name,
@@ -74,6 +74,25 @@ class _NewItemPageState extends State<NewItemPage> {
       };
 
       await DatabaseHelper().insertItem(item);
+
+      Fluttertoast.showToast(
+        msg: 'Se cargó exitosamente la publicación',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+      Navigator.pop(context);
+    } else {
+      Fluttertoast.showToast(
+        msg: 'Por favor, complete todos los campos y agregue una imagen.',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
     }
   }
   @override
@@ -103,7 +122,8 @@ class _NewItemPageState extends State<NewItemPage> {
         actions: <Widget>[
           TextButton(
             onPressed: () {
-              _addItem();
+              _addItem(context);
+               
                         
                 },
             child: Text(
@@ -152,8 +172,10 @@ class _NewItemPageState extends State<NewItemPage> {
           ),
         child:Center(
           child:Padding(
-            padding: EdgeInsets.all(25),
-            child:Column(children: [
+            padding:_image != null ?EdgeInsets.all(5) :EdgeInsets.all(25),
+            child:_image != null
+                ? Image.file(_image!)
+                : Column(children: [
             Transform(
               alignment: Alignment.center,
               transform: Matrix4.rotationY(3.14159), // Rotación de 180 grados en radianes
