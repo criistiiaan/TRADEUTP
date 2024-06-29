@@ -1,9 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:tradeutp/asset/database_helper.dart';
-import 'package:tradeutp/screen/new_item_page.dart';
 import '../asset/colors.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -164,10 +162,11 @@ class _HomePageState extends State<HomePage> {
                 } else {
                   List<Map<String, dynamic>> items = snapshot.data!;
                   return GridView.builder(
+                    padding: EdgeInsets.only(left:29, right:25, bottom:21),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      crossAxisSpacing: 10.0,
-                      mainAxisSpacing: 10.0,
+                      crossAxisSpacing: 20.0,
+                      mainAxisSpacing: 20.0,
                       childAspectRatio: 0.75, // Ajusta según tu preferencia
                     ),
                     itemCount: items.length,
@@ -216,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                               Text(item['description'], style: TextStyle(fontSize: 13, color: Colors.black),),
                               Text('\$${item['price']}', style: TextStyle(fontSize:13,color:colorfaintColor )),
                               ]),
-                              Icon(Icons.arrow_circle_right_outlined, size:33)])
+                              Icon(Icons.arrow_circle_right_outlined, size:40, weight: 345,)])
                             ],
                           ),
                         ),

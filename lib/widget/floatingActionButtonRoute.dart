@@ -1,3 +1,5 @@
+// ignore: file_names
+
 import 'package:flutter/material.dart';
 import 'package:tradeutp/asset/colors.dart';
 import 'package:tradeutp/screen/new_item_page.dart';
