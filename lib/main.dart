@@ -6,6 +6,8 @@ import 'package:tradeutp/screen/MessagesPage.dart';
 import 'package:tradeutp/screen/favorite_page.dart';
 import 'package:tradeutp/screen/home_page.dart';
 import 'package:tradeutp/widget/floatingActionButtonRoute.dart';
+import 'package:tradeutp/screen/notification_page.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -50,8 +52,9 @@ class MyHomePage extends StatelessWidget {
         children: [
           HomePage(),
           FavoritePage(),
-          //NotificationsScreen(),
-          MessagePage(),
+
+          NotificationPage(),
+          MessagesScreen(),
         ],
       ),
     );
