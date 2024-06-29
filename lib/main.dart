@@ -1,8 +1,8 @@
-import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
-
+import 'package:tradeutp/asset/database_helper.dart';
+import 'package:tradeutp/screen/home_page.dart';
 void main() {
   runApp(MyApp());
 }
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
-  var current = WordPair.random();
+
   int selectedIndex = 0;
 
   void setSelectedIndex(int index) {
