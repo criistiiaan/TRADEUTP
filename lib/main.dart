@@ -2,8 +2,15 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:tradeutp/asset/database_helper.dart';
+import 'package:tradeutp/screen/home_page.dart';
+import 'package:tradeutp/screen/new_item_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Inicializar la base de datos
+  await DatabaseHelper().database;
   runApp(MyApp());
 }
 
@@ -16,9 +23,9 @@ class MyApp extends StatelessWidget {
       create: (context) => MyAppState(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Namer App',
+        title: 'TradeUTP',
         
-        home: MyHomePage(),
+        home: HomePage(),
       ),
     );
   }
