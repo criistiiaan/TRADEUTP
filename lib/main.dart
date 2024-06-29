@@ -48,7 +48,7 @@ class MyHomePage extends StatelessWidget {
           HomePage(),
           FavoritesScreen(),
           NotificationPage(),
-          MessagesScreen(),
+          MessagePage(),
         ],
       ),
     );
