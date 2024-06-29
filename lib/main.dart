@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:tradeutp/asset/colors.dart';
 import 'package:tradeutp/asset/database_helper.dart';
 import 'package:tradeutp/screen/home_page.dart';
 void main() {
@@ -43,7 +44,7 @@ class MyHomePage extends StatelessWidget {
       body: IndexedStack(
         index: appState.selectedIndex,
         children: [
-          HomeScreen(),
+          HomePage(),
           FavoritesScreen(),
           NotificationsScreen(),
           MessagesScreen(),
@@ -59,32 +60,49 @@ class CustomBottomNavBar extends StatelessWidget {
     var appState = context.read<MyAppState>();
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Color.fromARGB(255, 34, 72, 33), // Fondo del Container
-          border: Border.all(
-            width: 2.0, // Ancho del borde
-          ),
-          borderRadius: BorderRadius.circular(64), // Bordes redondeados
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0), // Espaciado interno del Container
-          child: GNav(
-            backgroundColor: Color.fromARGB(255, 34, 72, 33),
-            activeColor: Color.fromARGB(255, 34, 72, 33),
-            tabBackgroundColor: Color.fromARGB(255, 231, 235, 220),
-            color: Colors.white,
-            padding: EdgeInsets.all(16),
-            tabs: BottomNavTabs.tabs,
-            selectedIndex: appState.selectedIndex,
-            onTabChange: (index) {
-              appState.setSelectedIndex(index);
-            },
-          ),
-        ),
-      ),
-    );
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
+          child: Container( 
+            decoration: BoxDecoration(
+                color: colormainColor, // Fondo del Container
+                borderRadius: BorderRadius.circular(64),
+                boxShadow: [
+                              BoxShadow(
+                              color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.25), // Color de la sombra
+                              spreadRadius: 5, // Radio de difusión
+                              blurRadius: 4, // Radio de desenfoque
+                              offset: Offset(0, 4), // Cambio de posición de la sombra
+                            ),
+      
+                            ], // Bordes redondeados,
+            ),
+            child:Padding(
+              padding: const EdgeInsets.all(12.0), // Espaciado interno del Container
+              child: GNav(
+                backgroundColor: colormainColor,
+                activeColor: colormainColor,
+                tabBackgroundColor: Color.fromARGB(255,231, 235, 220),
+                color: Colors.white,  
+                padding: EdgeInsets.all(16),
+                selectedIndex: appState.selectedIndex,
+                onTabChange: (index) {
+                  appState.setSelectedIndex(index);
+                },
+                tabs: const[
+                  GButton(icon: Icons.home,
+                  text: 'Inicio'),
+                GButton(icon: Icons.favorite_border,
+                text: 'Favoritos'),          
+                GButton(icon: Icons.notifications,
+                text: 'Notificaciones'),
+                GButton(icon: Icons.message, 
+                text: 'Mensajes'),
+            
+            
+                ]
+          ),))
+      );
+    
+    
   }
 }
 
