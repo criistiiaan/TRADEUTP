@@ -53,7 +53,6 @@ class MyHomePage extends StatelessWidget {
         children: [
           HomePage(),
           FavoritePage(),
-
           NotificationPage(),
           MessagesPage(),
         ],

@@ -62,6 +62,7 @@ class _NewItemPageState extends State<NewItemPage> {
       String description = descriptionController.text;
       String type = _selectedType!;
       double price = double.tryParse(priceController.text) ?? 0.0;
+
       String transaction = _selectedTransaction ?? '';
 
       Map<String, dynamic> item = {
@@ -70,6 +71,7 @@ class _NewItemPageState extends State<NewItemPage> {
         'type': type,
         'price': price,
         'transaction_type': transaction,
+        'fromUsers': userAccount[2],
         'image': _imagePath!,
       };
 
@@ -149,8 +151,8 @@ class _NewItemPageState extends State<NewItemPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
 
             children: [
-            Text(userAccount[0] ??  "Nombre Apellido"),
-            Text(userAccount[1] ??  "Nombre de Facultad", style: TextStyle(fontSize: 13, color:colorfaintColor),overflow: TextOverflow.ellipsis,
+            Text(userAccount[0].toString()??  "Nombre Apellido"),
+            Text(userAccount[1].toString() ??  "Nombre de Facultad", style: TextStyle(fontSize: 13, color:colorfaintColor),overflow: TextOverflow.ellipsis,
                         maxLines: 2,softWrap: true,)
           ],)
         ],),),

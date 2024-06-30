@@ -92,6 +92,12 @@ class DatabaseHelper {
       return await db.query('items',where: 'type = ?',whereArgs: [data], );}
     return getItems();
   }
+  Future<List<Map<String, dynamic>>> getItemsId( int data) async {
+    Database db = await database;
+    if(data != null){
+      return await db.query('items',where: 'id= ?',whereArgs: [data], );}
+    return await db.query('items',where: 'id= ?',whereArgs: [1], );}
+  
 
 
   Future<int> updateItem(Map<String, dynamic> item) async {
