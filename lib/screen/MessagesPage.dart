@@ -73,30 +73,7 @@ appBar: AppBar(
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Inicio',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favoritos',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notificaciones',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'Mensajes',
-          ),
-        ],
-        currentIndex: 3, // Índice del elemento seleccionado
-        onTap: (index) {
-          // Acción al seleccionar un elemento del BottomNavigationBar
-        },
-      ),
+      
     );
   }
 }

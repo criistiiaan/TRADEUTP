@@ -71,9 +71,28 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),),
               Expanded(                
-                flex: 1,
+                flex: 2,
                 child: Center(
-                  child: Icon(Icons.account_circle_sharp, size: 50,color: colormainColor,),
+                  child: Padding(
+            padding: const EdgeInsets.all(1.0),
+            child: Container(
+
+              height: 100,
+
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                
+                border: Border.all(
+                  color: colormainColor, // Color del borde
+                  width: 1.0, // Ancho del borde
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(3), // Espaciado entre el ícono y el borde
+                child: Icon(Icons.person, color: colormainColor,size: 42,),
+              ),
+            ),
+          ),
                   ),
                 )
             ],
