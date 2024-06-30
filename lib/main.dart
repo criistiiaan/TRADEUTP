@@ -5,6 +5,7 @@ import 'package:tradeutp/asset/colors.dart';
 import 'package:tradeutp/screen/MessagesPage.dart';
 import 'package:tradeutp/screen/favorite_page.dart';
 import 'package:tradeutp/screen/home_page.dart';
+import 'package:tradeutp/screen/messages/messages_page.dart';
 import 'package:tradeutp/widget/floatingActionButtonRoute.dart';
 import 'package:tradeutp/screen/notification_page.dart';
 
@@ -54,7 +55,7 @@ class MyHomePage extends StatelessWidget {
           FavoritePage(),
 
           NotificationPage(),
-          MessagesScreen(),
+          MessagesPage()
         ],
       ),
     );
@@ -112,10 +113,5 @@ class CustomBottomNavBar extends StatelessWidget {
     
   }
 }
-
-// Clase para la ventana de notificaciones
-
-
-
 
 
