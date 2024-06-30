@@ -1,9 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:tradeutp/asset/database_helper.dart';
-import 'package:tradeutp/screen/new_item_page.dart';
 import '../asset/colors.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -160,14 +158,15 @@ class _HomePageState extends State<HomePage> {
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(child: Text('No items found'));
+                  return Center(child: Text('No hay articulos publicados'));
                 } else {
                   List<Map<String, dynamic>> items = snapshot.data!;
                   return GridView.builder(
+                    padding: EdgeInsets.only(left:29, right:25, bottom:21),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      crossAxisSpacing: 10.0,
-                      mainAxisSpacing: 10.0,
+                      crossAxisSpacing: 20.0,
+                      mainAxisSpacing: 20.0,
                       childAspectRatio: 0.75, // Ajusta según tu preferencia
                     ),
                     itemCount: items.length,
@@ -216,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                               Text(item['description'], style: TextStyle(fontSize: 13, color: Colors.black),),
                               Text('\$${item['price']}', style: TextStyle(fontSize:13,color:colorfaintColor )),
                               ]),
-                              Icon(Icons.arrow_circle_right_outlined, size:33)])
+                              Icon(Icons.arrow_circle_right_outlined, size:40, weight: 345,)])
                             ],
                           ),
                         ),
@@ -230,20 +229,7 @@ class _HomePageState extends State<HomePage> {
         )
     
         ],),
-        floatingActionButton: ClipRRect(
-          borderRadius:BorderRadius.circular(200),
-          child:FloatingActionButton(
-          onPressed: (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => NewItemPage()),
-            );
-          },
-          backgroundColor: colormainColor,
-          
-          child: const Icon(Icons.add, color:Colors.white, ),
-
-        ),),
+        
         
       
       )
