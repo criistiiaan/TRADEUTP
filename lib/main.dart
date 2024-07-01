@@ -22,6 +22,12 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Trade UTP',
+        theme: ThemeData(
+          scaffoldBackgroundColor: Color.fromARGB(255, 248, 255, 245), // Color de fondo
+          appBarTheme: AppBarTheme(
+            backgroundColor: Color.fromARGB(255, 248, 255, 245), // Color del AppBar
+          ),
+        ),
         home: MyHomePage(),
       ),
     );
@@ -61,90 +67,35 @@ class InitialPage extends StatelessWidget {
       onTap: () {
         context.read<MyAppState>().setTappedToStart();
       },
-
-
-child: Scaffold(
-  backgroundColor: Color(0xFF004225), // Fondo verde oscuro
-  body: Stack(
-    children: [
-      Center(
-        child: Image.asset(
-          'lib/asset/Logo.png', // Ruta a tu logotipo
-          height: 200,
-        ),
-      ),
-      Positioned(
-        bottom: 20, // Ajusta esta posición según tu necesidad
-        left: 0,
-        right: 0,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Text(
-            'Tocar para iniciar...',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.white,
+      child: Scaffold(
+        backgroundColor: colormainColor, // Fondo verde oscuro
+        body: Stack(
+          children: [
+            Center(
+              child: Image.asset(
+                'lib/asset/Logo.png', // Ruta a tu logotipo
+                height: 200,
+              ),
             ),
-          ),
-        ),
-      ),
-    ],
-  ),
-),
-    );
-  }
-}
-
-class MainPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-
-    return Scaffold(
-      body: appState.hasTappedToStart ? MainPage() : InitialPage(),
-    );
-  }
-}
-
-class InitialPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        context.read<MyAppState>().setTappedToStart();
-      },
-
-
-child: Scaffold(
-  backgroundColor: Color(0xFF004225), // Fondo verde oscuro
-  body: Stack(
-    children: [
-      Center(
-        child: Image.asset(
-          'lib/asset/Logo.png', // Ruta a tu logotipo
-          height: 200,
-        ),
-      ),
-      Positioned(
-        bottom: 20, // Ajusta esta posición según tu necesidad
-        left: 0,
-        right: 0,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Text(
-            'Tocar para iniciar...',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.white,
+            Positioned(
+              bottom: 20, // Ajusta esta posición según tu necesidad
+              left: 0,
+              right: 0,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  'Tocar para iniciar...',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
-    ],
-  ),
-),
     );
   }
 }
@@ -194,7 +145,7 @@ class CustomBottomNavBar extends StatelessWidget {
           child: GNav(
             backgroundColor: colormainColor,
             activeColor: colormainColor,
-            tabBackgroundColor: Color.fromARGB(255,231, 235, 220),
+            tabBackgroundColor: Color.fromARGB(255, 231, 235, 220),
             color: Colors.white,
             padding: EdgeInsets.all(16),
             selectedIndex: appState.selectedIndex,
@@ -202,10 +153,10 @@ class CustomBottomNavBar extends StatelessWidget {
               appState.setSelectedIndex(index);
             },
             tabs: const [
-              GButton(icon: Icons.home, text: 'Inicio'),
-              GButton(icon: Icons.favorite_border, text: 'Favoritos'),
-              GButton(icon: Icons.notifications, text: 'Notificaciones'),
-              GButton(icon: Icons.message, text: 'Mensajes'),
+              GButton(icon: Icons.home, text: '  Inicio'),
+              GButton(icon: Icons.favorite_border, text: '  Favoritos'),
+              GButton(icon: Icons.notifications, text: '  Notificaciones'),
+              GButton(icon: Icons.message, text: '  Mensajes'),
             ],
           ),
         ),

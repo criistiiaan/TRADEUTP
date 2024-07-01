@@ -35,7 +35,7 @@ class _MessagesPageState extends State<MessagesPage> {
                   child: Container(
                     margin: const EdgeInsets.only(top: 26),
                     child: Text(
-                      "Notificaciones",
+                      "Mensajes",
                       style: TextStyle(
                         fontSize: 24,
                         color: colormainColor,

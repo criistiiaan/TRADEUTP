@@ -56,11 +56,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-
     return Scaffold(
       floatingActionButton: FloatingActionButtonRoute(),
       
-      body:Scaffold(
+      body: Scaffold(
 
         body: Column(children: [
           Container(
@@ -131,41 +130,42 @@ class _HomePageState extends State<HomePage> {
                  ],
         ),),
         Container(
-
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [SizedBox(width: 16,), ...texts.map((text) {
-                  return GestureDetector(
-                     onTap: () {
-                      setState(() {
-                        whatActiveFilter = text;
-                        print(whatActiveFilter);
-                        _refreshItems();
-                      });
-                    },
-                    child: Container (
-                    padding: EdgeInsets.only(left:10,top:23,right:1, bottom:10 ),
-                    child: Container(
-                      padding:EdgeInsets.only(left:31,top:3,bottom:3, right:31 ),
-                      decoration: BoxDecoration(
-                        color: whatActiveFilter == text ? colormainColor : colorfaintColorBackground, // Color de fondo del container
-                        border: Border.all(
-                          color: Color.fromARGB(0, 0, 0, 0),
-                          width: 4.0, // Grosor del borde
-                        ),
-                        borderRadius: BorderRadius.circular(30), // Esquinas redondeadas
+          margin: EdgeInsets.only(top: 5), // Aquí agregamos un margen superior de 20
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [SizedBox(width: 16,), ...texts.map((text) {
+                return GestureDetector(
+                   onTap: () {
+                    setState(() {
+                      whatActiveFilter = text;
+                      print(whatActiveFilter);
+                      _refreshItems();
+                    });
+                  },
+                  child: Container (
+                  padding: EdgeInsets.only(left:10,top:23,right:1, bottom:10 ),
+                  child: Container(
+                    padding:EdgeInsets.only(left:31,top:3,bottom:3, right:31 ),
+                    decoration: BoxDecoration(
+                      color: whatActiveFilter == text ? colormainColor : colorfaintColorBackground, // Color de fondo del container
+                      border: Border.all(
+                        color: Color.fromARGB(0, 0, 0, 0),
+                        width: 4.0, // Grosor del borde
                       ),
-                      child: Center( 
-                        child:Text(
-                      text,
-                      style: TextStyle(fontSize: 15.0, color:whatActiveFilter == text ? Colors.white:Colors.black),
-                    ),),),
-                  ));
-                }).toList(),]
-              ),
+                      borderRadius: BorderRadius.circular(30), // Esquinas redondeadas
+                    ),
+                    child: Center( 
+                      child:Text(
+                    text,
+                    style: TextStyle(fontSize: 15.0, color:whatActiveFilter == text ? Colors.white:Colors.black),
+                  ),),),
+                ));
+              }).toList(),]
             ),
           ),
+        ),
+        SizedBox(height: 20), // Añadimos una separación de 20 entre el filtro y los contenedores
         Expanded(
           child: RefreshIndicator(onRefresh: _refreshItems,
             child: FutureBuilder<List<Map<String, dynamic>>>(
