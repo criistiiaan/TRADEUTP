@@ -1,11 +1,13 @@
 
 import 'package:flutter/material.dart';
+import 'package:tradeutp/asset/database_helper.dart';
+import 'package:tradeutp/asset/userAccount.dart';
+import 'package:intl/intl.dart';
 
 class ConversationPage extends StatefulWidget {
-  final String name;
-  final String message;
-
-  const ConversationPage({super.key, required this.name, required this.message});
+  final String name ;
+  final int id;
+  const ConversationPage({super.key, required this.id, required this.name});
 
   @override
   State<ConversationPage> createState() => _ConversationPageState();
@@ -13,27 +15,51 @@ class ConversationPage extends StatefulWidget {
 
 class _ConversationPageState extends State<ConversationPage> {
   final TextEditingController _controller = TextEditingController();
-  final List<Map<String, dynamic>> _messages = [];
-
+  late Future<List<Map<String, dynamic>>> _itemsFuture;
   @override
   void initState() {
     super.initState();
-    _messages.add({'message': widget.message, 'isSentByMe': false});
+    _loadMessage(); 
   }
 
+  Future<void> _loadMessage() async {
+    setState(() {
+      _itemsFuture = DatabaseHelper().getMessagesForChat(widget.id); // Usar getItemById en lugar de getItemsId
+    });
+  }
+  void _uploadMessage(){
+    DatabaseHelper().insertMessage({
+        'fromIdChat':widget.id,
+        'fromIdUsers':userAccount[2],
+        'mensaje': _controller.text,
+        'Time': '${DateFormat('hh:mm a').format(DateTime.now())}',
+        'state':1 //1 visto 0 no visto
+      });
+  }
   void _sendMessage() {
     if (_controller.text.isNotEmpty) {
       setState(() {
-        _messages.add({'message': _controller.text, 'isSentByMe': true});
+        _uploadMessage();
+        _refreshMessage();
         _controller.clear();
       });
     }
   }
+  Future<void> _refreshMessage() async {
+      setState(() {
+      _itemsFuture = DatabaseHelper().getMessagesForChat(widget.id); // Usar getItemById en lugar de getItemsId
+      });
+    }
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+
+    // Calcular el padding deseado (un tercio del ancho de la pantalla)
+    double leftPadding = screenSize.width/ 5;
     return Scaffold(
       appBar: AppBar(
+        
         backgroundColor: Color.fromARGB(255, 248, 255, 245),
         toolbarHeight: 100.0,
         leading: IconButton(
@@ -46,7 +72,7 @@ class _ConversationPageState extends State<ConversationPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 100.0),
+              padding: EdgeInsets.only(left: leftPadding),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,20 +85,33 @@ class _ConversationPageState extends State<ConversationPage> {
             ),
           ],
         ),
-        centerTitle: false,
+        centerTitle: true,
       ),
       body: Column(
         children: <Widget>[
           Expanded(
-            child: ListView.builder(
-              reverse: true,
-              itemCount: _messages.length,
-              itemBuilder: (context, index) {
-                final message = _messages[_messages.length - 1 - index];
-                return _buildMessageRow(message['message'], message['isSentByMe']);
+            child: RefreshIndicator(onRefresh: _refreshMessage,
+            child: FutureBuilder<List<Map<String, dynamic>>>(
+              future: _itemsFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return Center(child: Text('No hay mensajes previos'));
+                } else {
+                  List<Map<String, dynamic>> messages = snapshot.data!;
+                  return  ListView.builder(
+                    itemCount: messages.length,
+                    itemBuilder: (context, index) {
+                      Map<String, dynamic> message= messages[index];
+                      return _buildMessageRow(message['mensaje'], userAccount[2] == message['fromIdUsers']) ;});}
+                
+                // _buildMessageRow(message['message'], message['isSentByMe']);
               },
-            ),
-          ),
+            )
+          )),
           SizedBox(height: 10), // Add some space between the input bar and the bottom of the screen
           _buildMessageInput(),
         ],

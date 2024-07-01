@@ -3,8 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:tradeutp/asset/colors.dart';
 import 'package:tradeutp/asset/database_helper.dart';
-import 'package:tradeutp/asset/userAccount.dart';
-import 'package:tradeutp/asset/userAccount.dart';
+import 'package:tradeutp/screen/messages/conversation.dart';
 
 class DetailsItemPage extends StatefulWidget {
   final int idItem;
@@ -18,6 +17,8 @@ class DetailsItemPage extends StatefulWidget {
 class _DetailsItemPageState extends State<DetailsItemPage> {
   
   late Future<List<Map<String, dynamic>>> _itemsFuture;
+  late Future<List<Map<String, dynamic>>> _userFuture;
+  String name_seller = '';
 
   @override
   void initState() {
@@ -28,6 +29,7 @@ class _DetailsItemPageState extends State<DetailsItemPage> {
   Future<void> _loadItem() async {
     setState(() {
       _itemsFuture = DatabaseHelper().getItemsId(widget.idItem); // Usar getItemById en lugar de getItemsId
+      _userFuture = DatabaseHelper().getUserByItem(widget.idItem);
     });
   }
 
@@ -155,11 +157,35 @@ class _DetailsItemPageState extends State<DetailsItemPage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,                       
                         children: [
-                      Text(userAccount[0].toString(), ),
-                      Text(userAccount[1].toString(),)
+                          FutureBuilder<List<Map<String, dynamic>>>(
+                          future: _userFuture,
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return Center(child: CircularProgressIndicator());
+                            } else if (snapshot.hasError) {
+                              return Center(child: Text('Error: ${snapshot.error}'));
+                            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                              return Center(child: Text('No se encontró el nombre del usuario'));
+                            } else {
+                              List<Map<String, dynamic>> users = snapshot.data!;
+                              Map<String, dynamic> user = users[0];
+                              name_seller = '${user['name']} ${user['surname']}';
+                              return Column(children:[Text( name_seller),
+                      Text(user['facultad'],)]);}}),
+                      
                     ],
                     ),),
-                      Column(children: [
+                      GestureDetector(
+                        onTap: () {
+                          
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => 
+                        ConversationPage(id: item['fromUsers'],name:name_seller)),);
+                      
+                        },
+                        child: Column(children: [
                         Row(children: [
                           Container(
                             decoration: BoxDecoration(
@@ -194,7 +220,7 @@ class _DetailsItemPageState extends State<DetailsItemPage> {
       
                         ],)
                       ],)
-                    ],),
+                  ),],),
                   ),
                   SizedBox(height: 24,),
                   Text("Otras de sus publicaciones",style: TextStyle(color: colormainColor, fontWeight: FontWeight.bold,fontSize: 16 ))

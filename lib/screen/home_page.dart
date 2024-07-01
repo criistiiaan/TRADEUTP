@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:tradeutp/asset/database_helper.dart';
 import 'package:tradeutp/screen/DetailsItemPage.dart';
+import 'package:tradeutp/widget/floatingActionButtonRoute.dart';
 import '../asset/colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     'Ropa',
     'Comida',
     'Útiles',
-    'Tecnologia',
+    'Tecnología',
   ];
   
   late Future<List<Map<String, dynamic>>> _itemsFuture;
@@ -55,9 +56,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    return Container(
-      color: colorbackground,
-      child:Scaffold(
+    return Scaffold(
+      floatingActionButton: FloatingActionButtonRoute(),
+      
+      body:Scaffold(
 
         body: Column(children: [
           Container(
@@ -237,7 +239,7 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                 Column(children: [
-                              Text(item['description'], style: TextStyle(fontSize: 13, color: Colors.black),),
+                              Text(item['type'], style: TextStyle(fontSize: 13, color: Colors.black),),
                               Text('\$${item['price']}', style: TextStyle(fontSize:13,color:Colors.black, fontWeight: FontWeight.w100 )),
                               ]),
                               Icon(Icons.arrow_circle_right_outlined, size:40, weight: 345,)])
@@ -252,7 +254,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-    
         ],)
         
         

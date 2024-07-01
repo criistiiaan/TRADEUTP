@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:tradeutp/asset/colors.dart';
-import 'package:tradeutp/screen/MessagesPage.dart';
 import 'package:tradeutp/screen/favorite_page.dart';
 import 'package:tradeutp/screen/home_page.dart';
 import 'package:tradeutp/screen/messages/messages_page.dart';
-import 'package:tradeutp/widget/floatingActionButtonRoute.dart';
 import 'package:tradeutp/screen/notification_page.dart';
 
 void main() {
@@ -45,8 +43,6 @@ class MyHomePage extends StatelessWidget {
     var appState = context.watch<MyAppState>();
 
     return Scaffold(
-      extendBody: true, // Extender el cuerpo detrás del bottomNavigationBar
-      floatingActionButton: FloatingActionButtonRoute(),
       bottomNavigationBar: CustomBottomNavBar(),
       body: IndexedStack(
         index: appState.selectedIndex,
