@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:tradeutp/asset/colors.dart';
 import 'package:tradeutp/asset/database_helper.dart';
+import 'package:tradeutp/asset/userAccount.dart';
+import 'package:tradeutp/asset/userAccount.dart';
 
 class DetailsItemPage extends StatefulWidget {
   final int idItem;
@@ -43,7 +45,7 @@ class _DetailsItemPageState extends State<DetailsItemPage> {
           icon: Icon(
             Icons.arrow_circle_left_outlined,
           ),
-          iconSize: 40,
+          iconSize: 50,
           color: colormainColor,
         ),
         title: Text(
@@ -90,44 +92,113 @@ class _DetailsItemPageState extends State<DetailsItemPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (item['image'].isNotEmpty)
-                    Container(
-                      height: 200,
-                      decoration: BoxDecoration(
-                        color: colorbackgroundColor,
-
-                        borderRadius: BorderRadius.circular(12.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 3,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Image.file(
-                        File(item['image']),
-                        fit: BoxFit.fitWidth,
-                      ),
-                    )
-                  else
-                    Placeholder(), // Placeholder en caso de no haber imagen
-                  SizedBox(height: 16.0),
-                  Text(
-                    item['name'],
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                  Container(
+                    padding: EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      color: colordetailedItemBackground, // Fondo verde
+                      borderRadius: BorderRadius.circular(12.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: item['image'].isNotEmpty
+                        ? Image.file(
+                            File(item['image']),
+                            fit: BoxFit.cover,
+                          )
+                        : Placeholder(), // Placeholder en caso de no haber imagen
                   ),
-                  SizedBox(height: 8.0),
+                  SizedBox(height: 16.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                    Text(
+                    item['name'],
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: colormainColor),
+                  ),
                   Text(
+                    '\$${item['price']*1.00}',
+                    style: TextStyle(fontSize: 36, color: colormainColor, fontWeight: FontWeight.bold),
+                  ),
+                  ],),
+                  
+                  SizedBox(height: 8.0),
+                  Container (
+                    height: 100,
+                    child: Text(
                     item['description'],
                     style: TextStyle(fontSize: 16, color: Colors.black),
-                  ),
+                  ),),
                   SizedBox(height: 8.0),
-                  Text(
-                    '\$${item['price']}',
-                    style: TextStyle(fontSize: 16, color: colorfaintColor),
+                  Text("Información del vendedor", style: TextStyle(color: colormainColor, fontWeight: FontWeight.bold,fontSize: 16 ),)
+                  ,Container(
+                    
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [                     
+                       Expanded(
+                        flex: 10,
+                        child:Container( 
+                          alignment: Alignment.topLeft,
+                          
+                          child:
+                        Icon(Icons.account_circle,size:64 ),),),
+
+                      Expanded(
+                        flex: 25,
+                        child: Column( 
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,                       
+                        children: [
+                      Text(userAccount[0].toString(), ),
+                      Text(userAccount[1].toString(),)
+                    ],
+                    ),),
+                      Column(children: [
+                        Row(children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.green[50], // Fondo verde claro
+                              borderRadius: BorderRadius.circular(30.0), // Bordes redondeados
+                              border: Border.all(
+                                color: Colors.green, // Color del borde
+                                width: 2.0, // Ancho del borde
+                              ),
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0), // Espaciado interno
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min, // Ajustar al contenido
+                              children: [
+                                Icon(
+                                  Icons.chat_bubble,
+                                  color: Colors.green[900], // Color del icono
+                                  size: 30.0, // Tamaño del icono
+                                ),
+                                SizedBox(width: 8.0), // Espacio entre el icono y el texto
+                                Text(
+                                  'Hola, ¿Está \ndisponible?',
+                                  style: TextStyle(
+                                    color: Colors.green[900], // Color del texto
+                                    fontSize: 11.0, // Tamaño del texto
+                                  ),
+                                  
+                                ),
+                              ],
+                            ),
+                          ),
+      
+                        ],)
+                      ],)
+                    ],),
                   ),
+                  SizedBox(height: 24,),
+                  Text("Otras de sus publicaciones",style: TextStyle(color: colormainColor, fontWeight: FontWeight.bold,fontSize: 16 ))
+                  ,Text("El usuario no tiene más publicaciones", style: TextStyle(color:colorfaintColor, fontSize: 12),)
                 ],
               ),
             );

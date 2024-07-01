@@ -107,6 +107,7 @@ class _NewItemPageState extends State<NewItemPage> {
       extendBody: true, // Extender el cuerpo detrás del bottomNavigationBar
 
       appBar: AppBar(
+        centerTitle: true,
         leading: TextButton(
           onPressed: () {
             Navigator.pop(context);
@@ -119,7 +120,7 @@ class _NewItemPageState extends State<NewItemPage> {
             ),
           ),
         ),
-        leadingWidth: 85,
+        leadingWidth: 82,
         title: Text('Nueva Publicación'),
         actions: <Widget>[
           TextButton(
@@ -191,7 +192,7 @@ class _NewItemPageState extends State<NewItemPage> {
           )),),),
           Padding(
             padding: EdgeInsets.only(left: 30),
-            child:Text("Elige Primero la foto principal de la publicación"),),
+            child:Text("Elige primero la foto principal de la publicación"),),
 Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -244,6 +245,28 @@ Padding(
               decoration: InputDecoration(
                 
                 labelText: 'Categoría',
+                fillColor: colorfaintColor,
+                border:OutlineInputBorder( // Define un borde redondeado
+                borderSide: BorderSide(color: Colors.grey), // Color del borde
+                borderRadius: BorderRadius.circular(10), // Radio de la esquina del borde
+              ),              ),
+            ), SizedBox(height: gapBetweenTextfield,),
+            DropdownButtonFormField<String>(
+              value: _selectedTransaction,
+              items: opcionesTransaction.map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedTransaction = newValue;
+                });
+              },
+              decoration: InputDecoration(
+
+                labelText: 'Tipo de transacción',
                 fillColor: colorfaintColor,
                 border:OutlineInputBorder( // Define un borde redondeado
                 borderSide: BorderSide(color: Colors.grey), // Color del borde

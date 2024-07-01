@@ -238,7 +238,7 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                 Column(children: [
                               Text(item['description'], style: TextStyle(fontSize: 13, color: Colors.black),),
-                              Text('\$${item['price']}', style: TextStyle(fontSize:13,color:colorfaintColor )),
+                              Text('\$${item['price']}', style: TextStyle(fontSize:13,color:Colors.black, fontWeight: FontWeight.w100 )),
                               ]),
                               Icon(Icons.arrow_circle_right_outlined, size:40, weight: 345,)])
                             ],
