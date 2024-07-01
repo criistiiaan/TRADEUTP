@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import '../asset/colors.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});
@@ -7,71 +9,101 @@ class FavoritePage extends StatefulWidget {
   State<FavoritePage> createState() => _FavoritePageState();
 }
 
-// clase para la ventana de favoritos
-class _FavoritePageState extends State<FavoritePage>  {
+class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Favoritos', style: TextStyle(color: Color.fromARGB(255, 34, 72, 33),fontWeight: FontWeight.bold)),
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.person, color: Color.fromARGB(255, 34, 72, 33)),
-            onPressed: () {
-              // Acción para el botón de perfil
-            },
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Buscar',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
+      body: Column(children: [
+        Container(
+          margin: const EdgeInsets.only(left: 29, right: 20, top: 30),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 8,
+                child: Container(
+                  margin: const EdgeInsets.only(top: 26),
+                  child: Text(
+                    "Favoritos",
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: colormainColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 4, // Número de elementos en la lista
-                itemBuilder: (context, index) {
-                  return Card(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    child: ListTile(
-                      leading: Image.network('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.flaticon.es%2Ficono-gratis%2Ftransparente_5376400&psig=AOvVaw32FvACLSk4IzE9P2vTwzKL&ust=1719707442535000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLCNlczH_4YDFQAAAAAdAAAAABAE'),
-                      title: Text('Libro de Cálculo'),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Lorem ipsum dolor sit amet, consectetur adipisc...'),
-                          SizedBox(height: 5),
-                          Text(
-                            'Venta \$0.00',
-                            style: TextStyle(
-                              color: Colors.green,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text('Vendedor'),
-                        ],
+              Expanded(
+                flex: 2,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(1.0),
+                    child: Container(
+                      height: 100,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: colormainColor, // Color del borde
+                          width: 1.0, // Ancho del borde
+                        ),
                       ),
-                      trailing: Icon(Icons.more_vert),
+                      child: Padding(
+                        padding: const EdgeInsets.all(3), // Espaciado entre el ícono y el borde
+                        child: Icon(
+                          Icons.person,
+                          color: colormainColor,
+                          size: 42,
+                        ),
+                      ),
                     ),
-                  );
-                },
-              ),
-            ),
-          ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
-      ),
+        Container(
+          margin: EdgeInsets.only(left: 30, right: 30),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 10,
+                child: TextField(
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                    hintText: 'Buscar',
+                    filled: true,
+                    fillColor: colorfaintColorBackground,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                      borderSide: BorderSide.none,
+                    ),
+                    contentPadding: EdgeInsets.symmetric(vertical: 1),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Icon(
+                  Icons.filter_list,
+                  size: 32,
+                ),
+              )
+            ],
+          ),
+        ),
+        SizedBox(height: 10), // Espacio reducido para mover el mensaje más arriba
+        Center(
+          child: Text(
+            'Aún no has agregado favoritos',
+            style: TextStyle(
+              color: Color.fromARGB(255, 131, 131, 131),
+              fontSize: 18, // Tamaño del texto ajustado
+              fontWeight: FontWeight.w500, // Peso de la fuente ajustado
+            ),
+            textAlign: TextAlign.center, // Centrando el texto
+          ),
+        ),
+      ]),
     );
   }
 }
-
-

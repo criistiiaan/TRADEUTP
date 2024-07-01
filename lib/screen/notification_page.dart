@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-
+import '../asset/colors.dart';
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
 
@@ -9,83 +9,100 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
-  @override
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: Size.fromHeight(90.0), // Set the height you want
-          child: AppBar(
-            backgroundColor: Color.fromARGB(255, 248, 255, 245),
-            iconTheme: IconThemeData(color: Color.fromARGB(255, 235, 253, 228)),
-            flexibleSpace: FlexibleSpaceBar(
-              background: Stack(
-                children: [
-                  Positioned(
-                    left: 25.0,
-                    top: 35.0, // Adjust this value to move the text up or down
-                    child: Text(
-                      'Notificaciones',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 34, 72, 33),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                      ),
+      body: Column(children: [
+        Container(
+          margin: const EdgeInsets.only(left: 29, right: 20, top: 30),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 8,
+                child: Container(
+                  margin: const EdgeInsets.only(top: 26),
+                  child: Text(
+                    "Notificaciones",
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: colormainColor,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Positioned(
-                    right: 25.0,
-                    top: 30.0, // Adjust this value to move the icon and circle up or down together
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(1.0),
                     child: Container(
+                      height: 100,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: Color.fromARGB(255, 34, 72, 33),
-                          width: 2.0,
+                          color: colormainColor, // Color del borde
+                          width: 1.0, // Ancho del borde
                         ),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Icon(Icons.person, color: Color.fromARGB(255, 34, 72, 33)),
+                        padding: const EdgeInsets.all(3), // Espaciado entre el ícono y el borde
+                        child: Icon(
+                          Icons.person,
+                          color: colormainColor,
+                          size: 42,
+                        ),
                       ),
                     ),
                   ),
-                ],
-              ),
-            ),
+                ),
+              )
+            ],
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        Container(
+          margin: EdgeInsets.only(left: 30, right: 30),
+          child: Row(
             children: [
-              TextField(
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.search),
-                  hintText: 'Buscar',
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                    borderSide: BorderSide.none,
+              Expanded(
+                flex: 10,
+                child: TextField(
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                    hintText: 'Buscar',
+                    filled: true,
+                    fillColor: colorfaintColorBackground,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                      borderSide: BorderSide.none,
+                    ),
+                    contentPadding: EdgeInsets.symmetric(vertical: 1),
                   ),
                 ),
               ),
-            SizedBox(height: 10), // Espacio reducido para mover el mensaje más arriba
-            Center(
-              child: Text(
-                'No tienes notificaciones recientes.',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 131, 131, 131),
-                  fontSize: 18, // Tamaño del texto ajustado
-                  fontWeight: FontWeight.w500, // Peso de la fuente ajustado
+              Expanded(
+                flex: 2,
+                child: Icon(
+                  Icons.filter_list,
+                  size: 32,
                 ),
-                textAlign: TextAlign.center, // Centrando el texto
-              ),
-            ),
-          ],
+              )
+            ],
+          ),
         ),
-      ),
+        SizedBox(height: 10), // Espacio reducido para mover el mensaje más arriba
+        Center(
+          child: Text(
+            'No tienes notificaciones recientes',
+            style: TextStyle(
+              color: Color.fromARGB(255, 131, 131, 131),
+              fontSize: 18, // Tamaño del texto ajustado
+              fontWeight: FontWeight.w500, // Peso de la fuente ajustado
+            ),
+            textAlign: TextAlign.center, // Centrando el texto
+          ),
+        ),
+      ]),
     );
   }
 }
