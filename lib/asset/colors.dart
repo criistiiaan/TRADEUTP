@@ -8,3 +8,4 @@ final Color colortextNormal = Color.fromARGB(255, 0 , 0, 0);
 final Color colorbackground = Color.fromARGB(255, 242, 243, 238);
 final Color colorfaintColor = Color.fromARGB(84, 0, 0, 0);
 final Color colorfaintColorBackground = Color.fromARGB(255, 230, 232, 229);
+final Color colordetailedItemBackground = Color.fromARGB(255, 178, 205, 154);
