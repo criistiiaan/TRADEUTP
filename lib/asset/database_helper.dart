@@ -31,6 +31,8 @@ class DatabaseHelper {
     if (oldVersion < 8) {
       await db.execute('ALTER TABLE items ADD COLUMN transaction_type TEXT');
     }
+    print( '''Select users.Name, users.Surname From users 
+    INNER JOIN items ON items.fromUsers = users.id WHERE items.id = 1''');
   }
   Future<void> _onCreate(Database db, int version) async {
      await db.execute('''
@@ -114,6 +116,18 @@ class DatabaseHelper {
     Database db = await database;
     return await db.query('users');
   }
+<<<<<<< Updated upstream
+=======
+  Future<List<Map<String, dynamic>>> getSelectUsers(int idUser) async {
+    Database db = await database;
+    return await db.query('users', where:'id = ?', whereArgs: [idUser]);
+  }
+  Future<List<Map<String, dynamic>>> getUserByItem(int idItem) async {
+    Database db = await database;
+    return await db.rawQuery('''Select users.name, users.surname, users.facultad From users 
+    INNER JOIN items ON items.fromUsers = users.id WHERE items.id = $idItem ''');
+  }
+>>>>>>> Stashed changes
 
   Future<int> updateUser(Map<String, dynamic> user) async {
     Database db = await database;

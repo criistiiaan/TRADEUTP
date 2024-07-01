@@ -51,11 +51,19 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< Updated upstream
 
     return Container(
       color: colorbackground,
       child:Scaffold(
         extendBody: true, // Extender el cuerpo detrás del bottomNavigationBar
+=======
+    print('ggg');
+    return Scaffold(
+      floatingActionButton: FloatingActionButtonRoute(),
+      
+      body:Scaffold(
+>>>>>>> Stashed changes
 
         body: Column(children: [
           Container(
