@@ -153,6 +153,7 @@ class _DetailsItemPageState extends State<DetailsItemPage> {
 
                       Expanded(
                         flex: 25,
+
                         child: 
                           FutureBuilder<List<Map<String, dynamic>>>(
                           future: _userFuture,
@@ -168,13 +169,13 @@ class _DetailsItemPageState extends State<DetailsItemPage> {
                               Map<String, dynamic> user = users[0];
                               name_seller = '${user['name']} ${user['surname']}';
                               print(name_seller);
-
                               return Column(mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children:[Text( name_seller),
                       Text(user['facultad'],)]);}}),
                       
                     ),
+
                       GestureDetector(
                         onTap: () {
                           

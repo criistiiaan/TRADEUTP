@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:tradeutp/asset/database_helper.dart';
+import 'package:tradeutp/screen/DetailsItemPage.dart';
+import 'package:tradeutp/widget/floatingActionButtonRoute.dart';
 import '../asset/colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,8 +13,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  
   String whatActiveFilter ='Para ti';
-
+  final TextEditingController busquedaController = TextEditingController();
   final List<String> texts = [
     'Para ti',
     'Todo',
@@ -27,8 +30,9 @@ class _HomePageState extends State<HomePage> {
     'Ropa',
     'Comida',
     'Útiles',
-    'Tecnologia',
+    'Tecnología',
   ];
+  
   late Future<List<Map<String, dynamic>>> _itemsFuture;
 
   @override
@@ -51,19 +55,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< Updated upstream
 
-    return Container(
-      color: colorbackground,
-      child:Scaffold(
-        extendBody: true, // Extender el cuerpo detrás del bottomNavigationBar
-=======
-    print('ggg');
+
     return Scaffold(
       floatingActionButton: FloatingActionButtonRoute(),
       
       body:Scaffold(
->>>>>>> Stashed changes
 
         body: Column(children: [
           Container(
@@ -106,47 +103,41 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        Row(
+        Container( 
+          margin: EdgeInsets.only(left:30, right:30),
+          child:Row(
           children: [
             Expanded(
-                flex: 8, // El primer elemento ocupa 3 partes del espacio total
-                child: Container(      
-            padding: EdgeInsets.only(top:2, left:17,bottom: 2),
-            decoration: BoxDecoration(
-                color: colorfaintColorBackground, // Color de fondo del container
-                border: Border.all(
-                  color: Color.fromARGB(0, 0, 0, 0),
-                  width: 4.0, // Grosor del borde
+              flex: 10,
+              child: TextField(
+                
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.search,),
+                  hintText: 'Buscar',
+                  filled: true,
+                  fillColor: colorfaintColorBackground,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  contentPadding: EdgeInsets.symmetric(vertical: 1),
                 ),
-                borderRadius: BorderRadius.circular(12), // Esquinas redondeadas
-              ),
-            margin: const EdgeInsets.only(left:29, right:20, top: 5),
-            child: Row(children: [
-                Icon(Icons.search, size:24, color: colorfaintColor), 
-                Text("Buscar", style:TextStyle(fontSize: 13, color: colorfaintColor))
-
-            ],),
+              ),),
+            Expanded(
+              flex:2,
+              child:Icon(Icons.filter_list, size: 32,) ,)
+              
+            
+                 ],
         ),),
-        Expanded(
-
-                flex: 1, // El primer elemento ocupa 3 partes del espacio total
-                child:Container(                 
-                  margin: const EdgeInsets.only( right:34),
-                  child:Center(
-                   child:Icon(Icons.filter_list, size: 27,color: colormainColor,),
-                   ),
-                   )
-        )],
-        ),
         Container(
-            padding: EdgeInsets.all(0),
 
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: texts.map((text) {
+                children: [SizedBox(width: 16,), ...texts.map((text) {
                   return GestureDetector(
-                    onTap: () {
+                     onTap: () {
                       setState(() {
                         whatActiveFilter = text;
                         print(whatActiveFilter);
@@ -154,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                       });
                     },
                     child: Container (
-                    padding: EdgeInsets.only(left:10,top:23,right:6, bottom:10 ),
+                    padding: EdgeInsets.only(left:10,top:23,right:1, bottom:10 ),
                     child: Container(
                       padding:EdgeInsets.only(left:31,top:3,bottom:3, right:31 ),
                       decoration: BoxDecoration(
@@ -171,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                       style: TextStyle(fontSize: 15.0, color:whatActiveFilter == text ? Colors.white:Colors.black),
                     ),),),
                   ));
-                }).toList(),
+                }).toList(),]
               ),
             ),
           ),
@@ -188,7 +179,7 @@ class _HomePageState extends State<HomePage> {
                   return Center(child: Text('No hay articulos publicados'));
                 } else {
                   List<Map<String, dynamic>> items = snapshot.data!;
-                  return GridView.builder(
+                  return  GridView.builder(
                     padding: EdgeInsets.only(left:29, right:25, bottom:21),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
@@ -200,7 +191,17 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (context, index) {
                       Map<String, dynamic> item = items[index];
                       return GridTile(
-                        child: Container(
+                        child: 
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => DetailsItemPage(idItem:item['id'])),
+                            );
+                            });
+                          },
+                    child: Container(
                           padding: EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
                             color: colorbackgroundColor,
@@ -239,23 +240,22 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                 Column(children: [
-                              Text(item['description'], style: TextStyle(fontSize: 13, color: Colors.black),),
-                              Text('\$${item['price']}', style: TextStyle(fontSize:13,color:colorfaintColor )),
+                              Text(item['type'], style: TextStyle(fontSize: 13, color: Colors.black),),
+                              Text('\$${item['price']}', style: TextStyle(fontSize:13,color:Colors.black, fontWeight: FontWeight.w100 )),
                               ]),
                               Icon(Icons.arrow_circle_right_outlined, size:40, weight: 345,)])
                             ],
                           ),
                         ),
-                      );
+                      ),);
                     },
                   );
-                }
+            }
               },
             ),
           ),
-        )
-    
-        ],),
+        ),
+        ],)
         
         
       
