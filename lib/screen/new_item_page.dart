@@ -101,27 +101,31 @@ class _NewItemPageState extends State<NewItemPage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double gapBetweenTextfield = 11;
-    double widthImagePicker = (width *0.9);
+    double widthImagePicker = (width *0.93);
+    print(widthImagePicker);
 
     return Scaffold(
       extendBody: true, // Extender el cuerpo detrás del bottomNavigationBar
 
       appBar: AppBar(
         centerTitle: true,
+        elevation: 1.0, // Aquí se añade la sombra
+        shadowColor: Colors.grey.withOpacity(0.5), // Color de la sombra
         leading: TextButton(
           onPressed: () {
             Navigator.pop(context);
           },
+          
           child: Text(
             'Cancelar',
             style: TextStyle(
-              color: Colors.black,
+              color: colormainColor,
               fontSize: 14,
             ),
           ),
         ),
         leadingWidth: 82,
-        title: Text('Nueva Publicación'),
+        title: Text('Nueva Publicación', style: TextStyle(color: colormainColor, fontWeight: FontWeight.bold),),
         actions: <Widget>[
           TextButton(
             onPressed: () {
@@ -132,8 +136,9 @@ class _NewItemPageState extends State<NewItemPage> {
             child: Text(
               'Publicar',
               style: TextStyle(
-                color: Colors.black,
+                color: colormainColor,
                 fontSize: 14,
+                fontWeight: FontWeight.bold
               ),
             ),
           ),
@@ -146,8 +151,25 @@ class _NewItemPageState extends State<NewItemPage> {
         Padding(
           
         padding: EdgeInsets.only(left: 20, top: 13,bottom: 13, right:20),
-        child:Row(children: [
-          Icon(Icons.account_circle_rounded, size: 48,),
+        child:Row(
+          children: [
+          Container(
+
+
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                
+                border: Border.all(
+                  color: colormainColor, // Color del borde
+                  width: 1.0, // Ancho del borde
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(3), // Espaciado entre el ícono y el borde
+                child: Icon(Icons.person, color: colormainColor,size: 42,),
+              ),
+            ),
+          SizedBox(width: 13),
           Column(
           crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -165,6 +187,7 @@ class _NewItemPageState extends State<NewItemPage> {
         child:Center( 
           child:Container(
           height: 100,
+          
           width: widthImagePicker,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -189,16 +212,20 @@ class _NewItemPageState extends State<NewItemPage> {
             
           ],),)
           
-          )),),),
+          )
+          ),
+          ),
+          ),
           Padding(
-            padding: EdgeInsets.only(left: 30),
+            padding: EdgeInsets.only(left: 20),
             child:Text("Elige primero la foto principal de la publicación"),),
 Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
+        
+        child:Column(
           children: <Widget>[
             TextField(
-
+              
               controller: nameController,
               decoration: InputDecoration(
                 border:OutlineInputBorder( // Define un borde redondeado
