@@ -59,9 +59,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       floatingActionButton: FloatingActionButtonRoute(),
       
-      body: Scaffold(
-
-        body: Column(children: [
+      body:Column(children: [
           Container(
             margin: const EdgeInsets.only(left:29, right:20, top: 30),
             child: Row(
@@ -259,7 +257,6 @@ class _HomePageState extends State<HomePage> {
         
         
       
-      )
-    );
+      );
   }
 }
