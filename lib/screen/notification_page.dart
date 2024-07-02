@@ -14,13 +14,13 @@ class _NotificationPageState extends State<NotificationPage> {
     return Scaffold(
       body: Column(children: [
         Container(
-          margin: const EdgeInsets.only(left: 29, right: 20, top: 30),
+          margin: const EdgeInsets.only(left: 29, right: 20, top: 15),
           child: Row(
             children: [
               Expanded(
                 flex: 8,
                 child: Container(
-                  margin: const EdgeInsets.only(top: 26),
+                  margin: const EdgeInsets.only(top: 30),
                   child: Text(
                     "Notificaciones",
                     style: TextStyle(

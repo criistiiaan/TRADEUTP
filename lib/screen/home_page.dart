@@ -63,14 +63,14 @@ class _HomePageState extends State<HomePage> {
 
         body: Column(children: [
           Container(
-            margin: const EdgeInsets.only(left:29, right:20, top: 30),
+            margin: const EdgeInsets.only(left:29, right:20, top: 15),
             child: Row(
             children: [
               Expanded(                
                 flex: 8, 
                 child: 
               Container(  
-                margin: const EdgeInsets.only( top: 26 ),
+                margin: const EdgeInsets.only( top: 30 ),
                 child: Text("Publicaciones", style:TextStyle(fontSize: 24, color: colormainColor, fontWeight: FontWeight.bold),
                 ),
               ),),
@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                  ],
         ),),
         Container(
-          margin: EdgeInsets.only(top: 5), // Aquí agregamos un margen superior de 20
+          margin: EdgeInsets.only(top: 8), // Aquí agregamos un margen superior de 20
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
@@ -144,9 +144,9 @@ class _HomePageState extends State<HomePage> {
                     });
                   },
                   child: Container (
-                  padding: EdgeInsets.only(left:10,top:23,right:1, bottom:10 ),
+                  padding: EdgeInsets.only(left:10,top:5,right:1, bottom:10 ),
                   child: Container(
-                    padding:EdgeInsets.only(left:31,top:3,bottom:3, right:31 ),
+                    padding:EdgeInsets.only(left:31,top:8,bottom:3, right:31 ),
                     decoration: BoxDecoration(
                       color: whatActiveFilter == text ? colormainColor : colorfaintColorBackground, // Color de fondo del container
                       border: Border.all(
@@ -165,7 +165,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-        SizedBox(height: 20), // Añadimos una separación de 20 entre el filtro y los contenedores
+        SizedBox(height: 5), // Añadimos una separación entre el filtro y los contenedores
         Expanded(
           child: RefreshIndicator(onRefresh: _refreshItems,
             child: FutureBuilder<List<Map<String, dynamic>>>(
