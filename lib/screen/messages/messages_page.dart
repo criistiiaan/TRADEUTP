@@ -27,13 +27,13 @@ class _MessagesPageState extends State<MessagesPage> {
       body: Column(
         children: [
           Container(
-            margin: const EdgeInsets.only(left: 29, right: 20, top: 30),
+            margin: const EdgeInsets.only(left: 29, right: 20, top: 15),
             child: Row(
               children: [
                 Expanded(
                   flex: 8,
                   child: Container(
-                    margin: const EdgeInsets.only(top: 26),
+                    margin: const EdgeInsets.only(top: 30),
                     child: Text(
                       "Mensajes",
                       style: TextStyle(
@@ -74,7 +74,7 @@ class _MessagesPageState extends State<MessagesPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: 30, right: 30),
+            margin: EdgeInsets.only(left: 30, right: 30, bottom: 2), // Ajustado el margen inferior
             child: Row(
               children: [
                 Expanded(
@@ -116,6 +116,7 @@ class _MessagesPageState extends State<MessagesPage> {
                 } else {
                   List<Map<String, dynamic>> chats = snapshot.data!;
                   return ListView.builder(
+                    padding: EdgeInsets.only(top: 10), // Añadido padding para mayor separación
                     itemCount: chats.length,
                     itemBuilder: (context, index) {
                       return ChatMessengerDesign(
@@ -188,35 +189,38 @@ class _ChatMessengerDesignState extends State<ChatMessengerDesign> {
           Map<String, dynamic> lastMessage = datos[0];
           Map<String, dynamic> users = datos[1];
 
-          return ListTile(
-            leading: CircleAvatar(
-              backgroundColor: Color.fromARGB(255, 34, 72, 33),
-              child: Icon(Icons.person, color: Color.fromARGB(255, 255, 255, 255)),
-            ),
-            title: Text(
-              '${users['name']} ${users['surname']}',
-              style: TextStyle(color: Color.fromARGB(255, 34, 72, 33)),
-            ),
-            subtitle: Text(
-              lastMessage['mensaje'],
-              style: TextStyle(color: Color.fromARGB(255, 131, 131, 131)),
-            ),
-            trailing: Text(
-              lastMessage['Time'],
-              style: TextStyle(color: Color.fromARGB(255, 131, 131, 131)),
-            ),
-            selected: true,
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ConversationPage(
-                    id: widget.chatId,
-                    name: '${users['name']} ${users['surname']}',
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0), // Ajusta este valor según sea necesario
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Color.fromARGB(255, 34, 72, 33),
+                child: Icon(Icons.person, color: Color.fromARGB(255, 255, 255, 255)),
+              ),
+              title: Text(
+                '${users['name']} ${users['surname']}',
+                style: TextStyle(color: Color.fromARGB(255, 34, 72, 33)),
+              ),
+              subtitle: Text(
+                lastMessage['mensaje'],
+                style: TextStyle(color: Color.fromARGB(255, 131, 131, 131)),
+              ),
+              trailing: Text(
+                lastMessage['Time'],
+                style: TextStyle(color: Color.fromARGB(255, 131, 131, 131)),
+              ),
+              selected: true,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ConversationPage(
+                      id: widget.chatId,
+                      name: '${users['name']} ${users['surname']}',
+                    ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           );
         }
       },

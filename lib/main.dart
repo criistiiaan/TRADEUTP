@@ -126,41 +126,42 @@ class CustomBottomNavBar extends StatelessWidget {
     var appState = context.read<MyAppState>();
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
-      child: Container(
-        decoration: BoxDecoration(
-          color: colormainColor, // Fondo del Container
-          borderRadius: BorderRadius.circular(64),
-          boxShadow: [
-            BoxShadow(
-              color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.25), // Color de la sombra
-              spreadRadius: 5, // Radio de difusión
-              blurRadius: 4, // Radio de desenfoque
-              offset: Offset(0, 4), // Cambio de posición de la sombra
-            ),
-          ], // Bordes redondeados,
+  padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
+  child: Container(
+    decoration: BoxDecoration(
+      color: colormainColor, // Fondo del Container
+      borderRadius: BorderRadius.circular(64),
+      boxShadow: [
+        BoxShadow(
+          color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.25), // Color de la sombra
+          spreadRadius: 5, // Radio de difusión
+          blurRadius: 4, // Radio de desenfoque
+          offset: Offset(0, 4), // Cambio de posición de la sombra
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0), // Espaciado interno del Container
-          child: GNav(
-            backgroundColor: colormainColor,
-            activeColor: colormainColor,
-            tabBackgroundColor: Color.fromARGB(255, 231, 235, 220),
-            color: Colors.white,
-            padding: EdgeInsets.all(16),
-            selectedIndex: appState.selectedIndex,
-            onTabChange: (index) {
-              appState.setSelectedIndex(index);
-            },
-            tabs: const [
-              GButton(icon: Icons.home, text: '  Inicio'),
-              GButton(icon: Icons.favorite_border, text: '  Favoritos'),
-              GButton(icon: Icons.notifications, text: '  Notificaciones'),
-              GButton(icon: Icons.message, text: '  Mensajes'),
-            ],
-          ),
-        ),
+      ], // Bordes redondeados,
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(12.0), // Espaciado interno del Container
+      child: GNav(
+        backgroundColor: colormainColor,
+        activeColor: colormainColor,
+        tabBackgroundColor: Color.fromARGB(255, 231, 235, 220),
+        color: Colors.white,
+        padding: EdgeInsets.all(16),
+        selectedIndex: appState.selectedIndex,
+        onTabChange: (index) {
+          appState.setSelectedIndex(index);
+        },
+        tabs: const [
+          GButton(icon: Icons.home, text: '  Inicio'),
+          GButton(icon: Icons.favorite_border, text: '  Favoritos'),
+          GButton(icon: Icons.notifications, text: '  Notificaciones'),
+          GButton(icon: Icons.message, text: '  Mensajes'),
+        ],
       ),
-    );
+    ),
+  ),
+);
+
   }
 }
