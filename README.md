@@ -1,16 +1,3 @@
-# tradeutp
+# Tradeutp
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Project developed in collaboration with @nonestdeus, a buy-and-sell application featuring four main views. The main page displays available items, supported by a dynamic database that allows new items to be added seamlessly. Each item can be viewed in detail, and users can navigate to a messaging tab to communicate with the seller. Another key view is the chat tab, where archived messages are displayed. While the chat functionality is primarily aesthetic at this stage, it sets the foundation for future development.****
